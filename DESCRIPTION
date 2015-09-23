@@ -9,6 +9,7 @@ Author: c(
 Maintainer: Who to complain to <oscpe436@student.liu.se>
 Description: Extracts information about municipalities in Sweden by using the Kolada API.
 License: CC0
+Imports: httr
 LazyData: true
 Suggests: testthat,
     knitr
