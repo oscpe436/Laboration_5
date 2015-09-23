@@ -22,11 +22,11 @@ GetKolada(kpi_id = "N00090", municipalities = "0580")
 
 Here comes an example if you are searching information for a specific year:
 ```{r}
-GetKolada(kpi_id = "N00090", municipalities = "0580", year = "2013")
+GetKolada(kpi_id = "N00090", municipalities = "0580", years = "2013")
 ```
 
 You can also get informationm for multiple municipalities,years and key indicators:
 ```{r}
-GetKolada(kpi_id = c("N00090", "N00041"), municipalities = c("0580", "0180"), year =c ("2010",2014,2007))
+GetKolada(kpi_id = c("N00090", "N00041"), municipalities = c("0580", "0180"), years =c ("2010",2014,2007))
 
 ```

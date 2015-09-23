@@ -19,7 +19,7 @@
 # content(a)
 
 
-GetKolada <- function(kpi_id, municipalities, year=""){
+GetKolada <- function(kpi_id, municipalities, years=""){
   
   #   browser()
   stopifnot(is.character(kpi_id), is.character(municipalities))
@@ -28,9 +28,9 @@ GetKolada <- function(kpi_id, municipalities, year=""){
   munic2 <- paste(municipalities, collapse=",")  
   kpi_t2 <- paste(kpi_id, collapse=",")
   
-  if(identical(year, "")) year2 <- "" else {
-    stopifnot(sum(is.na(as.numeric(year))) == 0)
-    year2 <- paste("/year/", paste(year, collapse=","), sep="")
+  if(identical(years, "")) year2 <- "" else {
+    stopifnot(sum(is.na(as.numeric(years))) == 0)
+    year2 <- paste("/year/", paste(years, collapse=","), sep="")
   }  
   
   url <- paste("http://api.kolada.se/v2/data/kpi/", kpi_t2, "/municipality/", munic2, year2, sep="")

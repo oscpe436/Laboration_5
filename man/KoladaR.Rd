@@ -2,15 +2,11 @@
 % Please edit documentation in R/documentation.R
 \docType{package}
 \name{KoladaR}
-\alias{GetKolada}
 \alias{KoladaR}
 \alias{KoladaR-package}
 \title{KoladaR package}
 \source{
 Kolada, see homepage.
-}
-\usage{
-GetKolada(kpi_id, municipalities, year = "")
 }
 \description{
 Contains the function GetKolada that extracts data using the Kolada API.
