@@ -23,7 +23,7 @@ GetKolada <- function(kpi_id, municipalities, year=""){
   
   #   browser()
   stopifnot(is.character(kpi_id), is.character(municipalities))
-#   stopifnot(sum(sapply(municipalities, FUN = function(x) !x %in% munic_code[,1]))==0)    
+  #   stopifnot(sum(sapply(municipalities, FUN = function(x) !x %in% munic_code[,1]))==0)    
   
   munic2 <- paste(municipalities, collapse=",")  
   kpi_t2 <- paste(kpi_id, collapse=",")
@@ -35,6 +35,7 @@ GetKolada <- function(kpi_id, municipalities, year=""){
   
   url <- paste("http://api.kolada.se/v2/data/kpi/", kpi_t2, "/municipality/", munic2, year2, sep="")
   response <- httr::GET(url)
+  
   
   stopifnot(httr::status_code(response)>=200 & httr::status_code(response)<300)
   stopifnot(httr::content(response)$count>0)
@@ -64,7 +65,7 @@ GetKolada <- function(kpi_id, municipalities, year=""){
       male_value[i] <- NA
       tot_value[i] <- ifelse(is.null(list_obj$values[[1]]$value), NA, list_obj$values[[1]]$value)
     }    
-#     print(i)
+    #     print(i)
   }
   
   Kolada_df <- data.frame(kpi, municipality=munip, year, female=female_value, male=male_value, total=tot_value)
@@ -83,6 +84,5 @@ a <- GetKolada("N00090", "0580", 2013)
 a <- GetKolada("N00090", "0580", 2010:2014)
 a <- GetKolada(c("N00090", "N00041"), c("0580", "0180"), 2010:2014)
 a <- GetKolada("N00105", "0580")
-
 
 

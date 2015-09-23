@@ -27,6 +27,6 @@ GetKolada(kpi_id = "N00090", municipalities = "0580", year = "2013")
 
 You can also get informationm for multiple municipalities,years and key indicators:
 ```{r}
-GetKolada(c("N00090", "N00041"), c("0580", "0180"), 2010:2014)
+GetKolada(kpi_id = c("N00090", "N00041"), municipalities = c("0580", "0180"), year =c ("2010",2014,2007))
 
 ```
