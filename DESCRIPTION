@@ -1,0 +1,15 @@
+Package: KoladaR
+Type: Package
+Title: Get information about Swedish municipalities
+Version: 0.0.1
+Date: 2015-09-23
+Author: c(
+ person("Oscar", "Pettersson", email="oscpe436@student.liu.se", role=c("cre", "aut"),
+ person("Vuong", "Tran", email="vuotr306@student.liu.se", role="aut"))
+Maintainer: Who to complain to <oscpe436@student.liu.se>
+Description: Extracts information about municipalities in Sweden by using the Kolada API.
+License: CC0
+LazyData: true
+Suggests: testthat,
+    knitr
+VignetteBuilder: knitr
