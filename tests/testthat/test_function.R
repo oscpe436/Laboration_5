@@ -1,7 +1,5 @@
 context("GetKolada function")
 
-# GetKolada("N00090", c("0580", "0180"))
-#hej
 test_that("function rejects errounous input.", {
   expect_error(GetKolada(FALSE, c("0580", "0180"))) # kpi is not character
   expect_error(GetKolada("N00090", c("0580", "0180"), "hej")) # hej is not a valid value of year

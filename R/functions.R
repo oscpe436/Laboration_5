@@ -5,58 +5,47 @@
 
 
 # response <- GET("http://api.kolada.se/v2/ou?title=skola&municipality=0580")
-
-
-
-#N00041 skattesats
-#N00090 sjukfrv
-#N00105  standardkostn kollekt.trf
-
-
-
 # a <- GET("http://api.kolada.se/v2/data/kpi/Ns00090/municipality/0580/year/2")
-# status_code(a)
-# content(a)
 
 
 GetKolada <- function(kpi_id, municipalities, years=""){
-  
+
   #   browser()
   stopifnot(is.character(kpi_id), is.character(municipalities))
-  #   stopifnot(sum(sapply(municipalities, FUN = function(x) !x %in% munic_code[,1]))==0)    
-  
-  munic2 <- paste(municipalities, collapse=",")  
+  #   stopifnot(sum(sapply(municipalities, FUN = function(x) !x %in% munic_code[,1]))==0)
+
+  munic2 <- paste(municipalities, collapse=",")
   kpi_t2 <- paste(kpi_id, collapse=",")
-  
+
   if(identical(years, "")) year2 <- "" else {
     stopifnot(sum(is.na(as.numeric(years))) == 0)
     year2 <- paste("/year/", paste(years, collapse=","), sep="")
-  }  
-  
+  }
+
   url <- paste("http://api.kolada.se/v2/data/kpi/", kpi_t2, "/municipality/", munic2, year2, sep="")
   response <- httr::GET(url)
-  
-  
+
+
   stopifnot(httr::status_code(response)>=200 & httr::status_code(response)<300)
   stopifnot(httr::content(response)$count>0)
-  
+
   Kolada_list <- httr::content(response)$values
   n <- length(Kolada_list)
-  
+
   kpi <- character(n)
   munip <- character(n)
   year <- numeric(n)
   female_value <- numeric(n)
   male_value <- numeric(n)
   tot_value <- numeric(n)
-  
+
   for(i in 1:n){
     list_obj <- Kolada_list[[i]]
     kpi[i] <- list_obj$kpi
     munip[i] <- list_obj$municipality
     year[i] <- list_obj$period
-    
-    if(length(list_obj$values)==3){      
+
+    if(length(list_obj$values)==3){
       female_value[i] <- ifelse(is.null(list_obj$values[[1]]$value), NA, list_obj$values[[1]]$value)
       male_value[i] <- ifelse(is.null(list_obj$values[[2]]$value), NA, list_obj$values[[2]]$value)
       tot_value[i] <- ifelse(is.null(list_obj$values[[3]]$value), NA, list_obj$values[[3]]$value)
@@ -64,25 +53,13 @@ GetKolada <- function(kpi_id, municipalities, years=""){
       female_value[i] <- NA
       male_value[i] <- NA
       tot_value[i] <- ifelse(is.null(list_obj$values[[1]]$value), NA, list_obj$values[[1]]$value)
-    }    
+    }
     #     print(i)
   }
-  
+
   Kolada_df <- data.frame(kpi, municipality=munip, year, female=female_value, male=male_value, total=tot_value)
-  
+
   return(Kolada_df)
-  
+
 }
-
-
-
-a <- GetKolada("N00090", "0580")
-a <- GetKolada("N00090", c("0580", "0180"))
-a <- GetKolada("N00041", "0580")
-a <- GetKolada(c("N00090", "N00041"), c("0580", "0180"))
-a <- GetKolada("N00090", "0580", 2013)
-a <- GetKolada("N00090", "0580", 2010:2014)
-a <- GetKolada(c("N00090", "N00041"), c("0580", "0180"), 2010:2014)
-a <- GetKolada("N00105", "0580")
-
 

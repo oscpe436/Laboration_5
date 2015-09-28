@@ -1,7 +1,7 @@
 Package: KoladaR
 Type: Package
 Title: Get information about Swedish municipalities
-Version: 0.0.1
+Version: 1.0.0
 Date: 2015-09-23
 Author: c(
  person("Oscar", "Pettersson", email="oscpe436@student.liu.se", role=c("cre", "aut"),
